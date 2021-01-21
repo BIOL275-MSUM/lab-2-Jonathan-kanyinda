@@ -39,7 +39,7 @@ n <- length(k) # sample size
 sem <- sd(k) / sqrt(n) 
 ```
 
-And finally, I can see the 95% confidence interval ranges from a minimum of --- to a maximum of ___
+And finally, I can see the 95% confidence interval ranges from a minimum of 4.203409 to a maximum of 5.430591
 
 ```{r mean}
 mean(k) + 1.96 * sem 
@@ -59,16 +59,13 @@ We could visualize the data as follows.
 
 library(tidyverse)
 
-# check to make sure you did the part above correctly
-# if not, generate some fake x data
-x<-k
-if (!exists("x") | !is.numeric(x) | !length(x) == 10) x <- rep(1, 10)
+
 
 # put the chick data into a data frame
 chick_data <-
   tibble::tibble(
     diet = rep(c("Combined", "Combined", "Organic", "Non-Organic"), each = 5),
-    weight = c(x, x)
+    weight = c(k, k)
   )
 
 # summarize the chick weights by diet
@@ -101,5 +98,12 @@ ggplot(chick_data, aes(x = diet, y = weight, color = diet, fill = diet)) +
     fill = "Diet",
     y = "Weight (g)"
   )
+```
 
+## Session Info
+
+Here is my session information:
+
+```{r}
+sessioninfo::session_info()
 ```
